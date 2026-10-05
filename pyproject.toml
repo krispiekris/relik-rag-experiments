@@ -21,3 +21,8 @@ relik-rag-experiments = "relik_rag_experiments:main"
 [build-system]
 requires = ["uv_build>=0.12.13,<0.13.0"]
 build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pip>=26.2.1",
+]
