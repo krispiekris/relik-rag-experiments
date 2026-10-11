@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "datasets>=2.13,<2.15",
+    "gliner>=0.2.22",
     "llama-index-core>=0.14.25",
     "llama-index-embeddings-huggingface>=0.8.0",
     "numpy==1.26.4",
