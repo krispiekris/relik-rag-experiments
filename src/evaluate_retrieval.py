@@ -109,7 +109,8 @@ print("LOADING BGE")
 print("=" * 80)
 
 Settings.embed_model = HuggingFaceEmbedding(
-    model_name=EMBEDDING_MODEL
+    model_name=EMBEDDING_MODEL,
+    device="cuda"
 )
 
 print("BGE loaded.")
@@ -170,7 +171,8 @@ if missing_ids:
     )
 
     relik = Relik.from_pretrained(
-        RELIK_MODEL
+        RELIK_MODEL,
+        device="cuda"
     )
 
     print("Relik loaded.")
