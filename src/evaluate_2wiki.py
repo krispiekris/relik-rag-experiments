@@ -13,12 +13,18 @@ from relik.inference.data.objects import RelikOutput
 # Configuration
 # =========================================================
 
-NUM_EXAMPLES = 100
+NUM_EXAMPLES = 20
+DATASET_SEED = 42
 TOP_K_VALUES = [2, 5]
 ALPHA = 0.10
 
-CACHE_PATH = Path("data/relik_annotations_100.json")
-RESULTS_PATH = Path("results/retrieval_100.json")
+CACHE_PATH = Path(
+    "data/2wiki_relik_annotations_20.json"
+)
+
+RESULTS_PATH = Path(
+    "results/2wiki_retrieval_20.json"
+)
 
 EMBEDDING_MODEL = "BAAI/bge-base-en-v1.5"
 RELIK_MODEL = "sapienzanlp/relik-entity-linking-large"
@@ -44,7 +50,7 @@ def calculate_recall(
     gold_titles: set[str],
     k: int,
 ) -> float:
-    """Calculate Recall@K for one HotpotQA question."""
+    """Calculate Recall@K for one multi-hop question."""
 
     if not gold_titles:
         return 0.0
@@ -75,9 +81,8 @@ def save_relik_cache(cache: dict) -> None:
             ensure_ascii=False,
         )
 
-
 # =========================================================
-# 1. Load HotpotQA
+# 1. Load 2WikiMultihopQA
 # =========================================================
 
 print("=" * 80)
@@ -86,19 +91,25 @@ print("=" * 80)
 
 print(
     f"Loading {NUM_EXAMPLES} "
-    f"HotpotQA validation examples..."
+    f"2WikiMultihopQA dev examples..."
 )
 
 dataset = load_dataset(
-    "hotpotqa/hotpot_qa",
-    "distractor",
-    split=f"validation[:{NUM_EXAMPLES}]",
+    "xanhho/2WikiMultihopQA",
+    split="dev",
+)
+
+# Deterministic sample, avoiding dependence on
+# the dataset's original ordering.
+dataset = (
+    dataset
+    .shuffle(seed=DATASET_SEED)
+    .select(range(NUM_EXAMPLES))
 )
 
 print(
     f"Loaded {len(dataset)} examples."
 )
-
 
 # =========================================================
 # 2. Load BGE embedding model
@@ -145,7 +156,7 @@ if CACHE_PATH.exists():
 # =========================================================
 
 example_ids = {
-    example["id"]
+    example["_id"]
     for example in dataset
 }
 
@@ -210,7 +221,7 @@ for example_number, example in enumerate(
     start=1,
 ):
 
-    example_id = example["id"]
+    example_id = example["_id"]
     question = example["question"]
 
     gold_titles = set(
@@ -222,7 +233,7 @@ for example_number, example in enumerate(
     )
 
     sentence_groups = list(
-        example["context"]["sentences"]
+        example["context"]["content"]
     )
 
     print("\n" + "-" * 80)
@@ -692,16 +703,22 @@ RESULTS_PATH.parent.mkdir(
 
 output = {
     "configuration": {
-        "num_examples":
-            NUM_EXAMPLES,
-        "embedding_model":
-            EMBEDDING_MODEL,
-        "relik_model":
-            RELIK_MODEL,
-        "alpha":
-            ALPHA,
-        "top_k_values":
-            TOP_K_VALUES,
+    "dataset":
+        "xanhho/2WikiMultihopQA",
+    "dataset_split":
+        "dev",
+    "dataset_seed":
+        DATASET_SEED,
+    "num_examples":
+        NUM_EXAMPLES,
+    "embedding_model":
+        EMBEDDING_MODEL,
+    "relik_model":
+        RELIK_MODEL,
+    "alpha":
+        ALPHA,
+    "top_k_values":
+        TOP_K_VALUES,
     },
     "summary":
         summary,
