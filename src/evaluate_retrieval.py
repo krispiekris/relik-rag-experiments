@@ -13,15 +13,15 @@ from relik.inference.data.objects import RelikOutput
 # Configuration
 # =========================================================
 
-NUM_EXAMPLES = 20
+NUM_EXAMPLES = 100
 TOP_K_VALUES = [2, 5]
 ALPHA = 0.10
 
-CACHE_PATH = Path("data/relik_annotations_20.json")
-RESULTS_PATH = Path("results/retrieval_20.json")
+CACHE_PATH = Path("data/relik_annotations_100.json")
+RESULTS_PATH = Path("results/retrieval_100.json")
 
 EMBEDDING_MODEL = "BAAI/bge-base-en-v1.5"
-RELIK_MODEL = "sapienzanlp/relik-entity-linking-small"
+RELIK_MODEL = "sapienzanlp/relik-entity-linking-large"
 
 
 # =========================================================
