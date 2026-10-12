@@ -13,17 +13,17 @@ from relik.inference.data.objects import RelikOutput
 # Configuration
 # =========================================================
 
-NUM_EXAMPLES = 20
+NUM_EXAMPLES = 50
 DATASET_SEED = 42
 TOP_K_VALUES = [2, 5]
 ALPHA = 0.10
 
 CACHE_PATH = Path(
-    "data/2wiki_relik_annotations_20.json"
+    "data/2wiki_relik_annotations_50.json"
 )
 
 RESULTS_PATH = Path(
-    "results/2wiki_retrieval_20.json"
+    "results/2wiki_retrieval_50.json"
 )
 
 EMBEDDING_MODEL = "BAAI/bge-base-en-v1.5"
