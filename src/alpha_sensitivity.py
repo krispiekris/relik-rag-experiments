@@ -6,17 +6,20 @@ from pathlib import Path
 # Configuration
 # =========================================================
 
-RESULTS_PATH = Path("results/retrieval_20.json")
-OUTPUT_PATH = Path("results/alpha_sensitivity_20.json")
+RESULTS_PATH = Path("results/retrieval_1000.json")
+OUTPUT_PATH = Path("results/alpha_sensitivity_1000.json")
 
 ALPHAS = [
-    0.00,
-    0.01,
+    0.011,
+    0.0125,
+    0.014,
+    0.02,
     0.025,
-    0.05,
-    0.075,
-    0.10,
-    0.20,
+    0.03,
+    0.125,
+    0.14,
+    0.2,
+    0.21,
 ]
 
 TOP_K_VALUES = [2, 5]
