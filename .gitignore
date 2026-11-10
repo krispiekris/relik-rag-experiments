@@ -25,6 +25,7 @@ htmlcov/
 # Downloaded datasets, model caches, and generated experiment output
 data/*
 results/*
+logs/*
 *.cache
 .cache/
 .huggingface/
@@ -36,3 +37,4 @@ results/*
 .DS_Store
 Thumbs.db
 .vscode/
+src/experiments.py
