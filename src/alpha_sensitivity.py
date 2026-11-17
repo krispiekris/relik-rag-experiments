@@ -10,16 +10,14 @@ RESULTS_PATH = Path("results/retrieval_1000.json")
 OUTPUT_PATH = Path("results/alpha_sensitivity_1000.json")
 
 ALPHAS = [
-    0.011,
-    0.0125,
-    0.014,
-    0.02,
-    0.025,
-    0.03,
-    0.125,
-    0.14,
-    0.2,
-    0.21,
+    0.011,    # Best aggregate plateau
+    0.0125,   # Same best result, original representative
+    0.014,    # Best Recall@5 and balance@5
+    0.024,    # Intermediate intervention strength
+    0.1225,   # First maximum wins@5 point
+    0.135,    # First joint maximum wins point
+    0.205,    # Last tested joint maximum
+    0.215,    # First tested decline
 ]
 
 TOP_K_VALUES = [2, 5]
